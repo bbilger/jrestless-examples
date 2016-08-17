@@ -1,3 +1,5 @@
+def checkstyleCfg = "${projectDir}/../../alien/checkstyle/checkstyle.xml" as File
+
 buildscript {
 	repositories {
 		mavenCentral()
@@ -17,6 +19,9 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'com.benjaminsproule.swagger'
 apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -42,6 +47,31 @@ dependencies {
 		'junit:junit:4.12',
 		'org.mockito:mockito-core:1.10.19'
 	)
+}
+
+checkstyle {
+	configFile = checkstyleCfg
+	toolVersion = '6.19'
+	ignoreFailures = false
+	sourceSets = [project.sourceSets.main]
+}
+build.dependsOn checkstyleMain
+
+findbugs {
+	toolVersion = '3.0.1'
+	sourceSets = [project.sourceSets.main]
+	effort = 'max'
+}
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
+}
+
+pmd {
+	toolVersion = '5.4.2'
+	sourceSets = [project.sourceSets.main]
 }
 
 task buildZip(type: Zip) {
