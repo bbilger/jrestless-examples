@@ -1,3 +1,5 @@
+generated/
+awsSwaggerConfiguration.json
 
 # ---------------------------------------
 # Java.gitignore

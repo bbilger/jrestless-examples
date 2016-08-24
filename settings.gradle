@@ -1,2 +1,2 @@
-include 'aws:simple'
+include 'aws:simple', 'aws:spring'
 rootProject.name = 'jrestless-examples'

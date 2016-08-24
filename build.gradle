@@ -4,5 +4,6 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8 
 
 dependencies {
-	compile project(":aws:simple")
+	compile project(':aws:simple')
+	compile project(':aws:spring')
 }
