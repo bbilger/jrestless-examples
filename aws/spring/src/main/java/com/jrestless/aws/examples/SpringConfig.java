@@ -1,9 +1,9 @@
-package com.jrestless.aws.spring;
+package com.jrestless.aws.examples;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "com.jrestless.aws.spring")
+@ComponentScan(basePackages = "com.jrestless.aws.examples")
 public class SpringConfig {
 }

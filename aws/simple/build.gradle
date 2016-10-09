@@ -1,23 +1,6 @@
 def checkstyleCfg = "${projectDir}/../../alien/checkstyle/checkstyle.xml" as File
 
-buildscript {
-	repositories {
-		mavenCentral()
-		jcenter()
-		maven {
-			url 'https://dl.bintray.com/bbilger/maven/'
-		}
-	}
-	dependencies {
-		classpath(
-			'com.jrestless.aws:jrestless-aws-swagger:0.0.1',
-			'com.benjaminsproule:swagger-gradle-plugin:0.0.6'
-		)
-	}
-}
-
 apply plugin: 'java'
-apply plugin: 'com.benjaminsproule.swagger'
 apply plugin: 'eclipse'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
@@ -37,10 +20,9 @@ repositories {
 
 dependencies {
 	compile(
-		'com.jrestless.aws:jrestless-aws-handler:0.0.1',
+		'com.jrestless.aws:jrestless-aws-gateway-handler:0.2.0',
 		'com.amazonaws:aws-lambda-java-log4j:1.0.0',
 		'org.glassfish.jersey.media:jersey-media-json-jackson:2.23',
-		'io.swagger:swagger-annotations:1.5.9',
 		'org.slf4j:slf4j-log4j12:1.7.21'
 	)
 	testCompile (
@@ -83,35 +65,6 @@ task buildZip(type: Zip) {
 }
 
 build.dependsOn buildZip
-
-swagger {
-	System.setProperty('aws-swagger-configuration', "${projectDir}/src/main/resources/awsSwaggerConfiguration.json")
-	
-	apiSource {
-		springmvc = false
-		locations = 'com.jrestless.aws'
-		schemes = 'http,https'
-		host = 'www.example.com:8080'
-		basePath = '/api'
-		info {
-			title = 'JRestless AWS Example'
-			version = 'v1'
-			description = 'This is a sample.'
-			termsOfService = 'http://www.example.com/termsOfService'
-			contact {
-				email = 'email@email.com'
-				name = 'Name'
-				url = 'http://www.example.com'
-			}
-			license {
-				url = 'http://www.apache.org/licenses/LICENSE-2.0.html'
-				name = 'Apache 2.0'
-			}
-		}
-		swaggerDirectory = "${projectDir}/generated/swagger-ui"
-		swaggerApiReader = 'com.jrestless.aws.swagger.AwsJaxRsReader'
-	}
-}
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '3.0'

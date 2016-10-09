@@ -1,6 +1,5 @@
-package com.jrestless.aws.spring;
+package com.jrestless.aws.examples;
 
 public interface GoodbyeService {
-
 	String goodbye();
 }

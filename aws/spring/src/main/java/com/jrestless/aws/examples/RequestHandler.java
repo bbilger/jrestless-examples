@@ -1,4 +1,4 @@
-package com.jrestless.aws.spring;
+package com.jrestless.aws.examples;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
@@ -6,10 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.jrestless.aws.GatewayResourceConfig;
-import com.jrestless.aws.handler.GatewayRequestObjectHandler;
-import com.jrestless.aws.io.GatewayRequest;
+import com.jrestless.aws.gateway.GatewayResourceConfig;
+import com.jrestless.aws.gateway.handler.GatewayRequestAndLambdaContext;
+import com.jrestless.aws.gateway.handler.GatewayRequestObjectHandler;
+import com.jrestless.aws.gateway.io.GatewayResponse;
+import com.jrestless.core.container.io.JRestlessContainerRequest;
 
 /**
  * The request handler as lambda function.
@@ -25,27 +26,22 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 		// configure the application with the resource
 		ResourceConfig resourceConfig = new GatewayResourceConfig()
 				.register(RequestContextFilter.class)
-				.packages("com.jrestless.aws.spring");
+				.packages("com.jrestless.aws.examples");
 		resourceConfig.property("contextConfig", new AnnotationConfigApplicationContext(SpringConfig.class));
 		init(resourceConfig);
 		start();
 	}
 
 	@Override
-	protected void beforeHandleRequest(GatewayRequest request, Context context) {
-		LOG.info("start to handle request: " + request);
+	public void beforeHandleRequest(GatewayRequestAndLambdaContext request,
+			JRestlessContainerRequest containerRequest) {
+		LOG.info("start to handle request: " + request.getGatewayRequest());
 	}
 
 	@Override
-	protected GatewayContainerResponse onRequestSuccess(GatewayContainerResponse response, GatewayRequest request,
-			Context context) {
+	public GatewayResponse onRequestSuccess(GatewayResponse response, GatewayRequestAndLambdaContext request,
+			JRestlessContainerRequest containerRequest) {
 		LOG.info("request handled successfully: " + response);
 		return response;
-	}
-
-	@Override
-	protected GatewayContainerResponse onRequestFailure(Exception e, GatewayRequest request, Context context) {
-		LOG.error("request handling failed: ", e);
-		return null;
 	}
 }

@@ -1,4 +1,4 @@
-package com.jrestless.aws.spring;
+package com.jrestless.aws.examples;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
