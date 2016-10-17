@@ -1,4 +1,4 @@
-def checkstyleCfg = "${projectDir}/../../alien/checkstyle/checkstyle.xml" as File
+def checkstyleCfg = "${projectDir}/../../../alien/checkstyle/checkstyle.xml" as File
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
 	compile(
-		'com.jrestless.aws:jrestless-aws-gateway-handler:0.2.0',
+		'com.jrestless.aws:jrestless-aws-gateway-handler:0.3.0',
 		'com.amazonaws:aws-lambda-java-log4j:1.0.0',
 		'org.glassfish.jersey.media:jersey-media-json-jackson:2.23',
 		'org.slf4j:slf4j-log4j12:1.7.21',

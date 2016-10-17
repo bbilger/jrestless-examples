@@ -1,2 +1,2 @@
-include 'aws:simple', 'aws:spring'
+include 'aws:gateway:aws-gateway-showcase', 'aws:gateway:aws-gateway-spring'
 rootProject.name = 'jrestless-examples'
