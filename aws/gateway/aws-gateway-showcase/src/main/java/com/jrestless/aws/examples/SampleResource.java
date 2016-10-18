@@ -28,7 +28,7 @@ import com.jrestless.aws.gateway.io.GatewayRequestContext;
  * @author Bjoern Bilger
  *
  */
-@Path("/")
+@Path("/api")
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON })
 public class SampleResource {

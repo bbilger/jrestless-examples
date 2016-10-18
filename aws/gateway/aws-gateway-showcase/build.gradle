@@ -55,13 +55,13 @@ pmd {
 }
 
 task buildZip(type: Zip) {
+	archiveName = "${project.name}.zip"
 	from compileJava
 	from processResources
 	into('lib') {
 		from configurations.runtime
 	}
 }
-
 build.dependsOn buildZip
 
 task wrapper(type: Wrapper) {

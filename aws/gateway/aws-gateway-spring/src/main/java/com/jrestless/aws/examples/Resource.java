@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-@Path("/")
+@Path("/api")
 @Controller
 public class Resource {
 
@@ -18,14 +18,14 @@ public class Resource {
 	@Autowired
 	private GoodbyeService goodbyeService;
 
-	@Path("hello")
+	@Path("/hello")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayHello() {
 		return greetingService.greet();
 	}
 
-	@Path("goodbye")
+	@Path("/goodbye")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayGoodbye() {

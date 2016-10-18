@@ -1,0 +1,18 @@
+service: aws-gateway-showcase-service
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: us-west-2
+
+package:
+  artifact: build/distributions/aws-gateway-showcase.zip
+
+functions:
+  api:
+    handler: com.jrestless.aws.examples.RequestHandler
+    events:
+      - http:
+          path: api/{proxy+}
+          method: any
