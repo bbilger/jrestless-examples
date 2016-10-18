@@ -1,0 +1,18 @@
+service: aws-gateway-usage-example-service
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: us-west-2
+
+package:
+  artifact: build/distributions/aws-gateway-usage-example.zip
+
+functions:
+  sample:
+    handler: com.jrestless.aws.examples.RequestHandler
+    events:
+      - http:
+          path: sample/{proxy+}
+          method: any

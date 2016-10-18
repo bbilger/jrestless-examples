@@ -60,6 +60,7 @@ subprojects {
 dependencies {
 	compile project(':aws:gateway:aws-gateway-showcase')
 	compile project(':aws:gateway:aws-gateway-spring')
+	compile project(':aws:gateway:aws-gateway-usage-example')
 }
 
 task wrapper(type: Wrapper) {
