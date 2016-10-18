@@ -1,9 +1,67 @@
-apply plugin: 'java'
+def checkstyleCfg = "${projectDir}/alien/checkstyle/checkstyle.xml" as File
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8 
+allprojects {
+	apply plugin: 'java'
+	
+	version = '0.0.1-SNAPSHOT'
+	
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+}
+
+subprojects {
+
+	apply plugin: 'eclipse'
+	apply plugin: 'checkstyle'
+	apply plugin: 'findbugs'
+	apply plugin: 'pmd'
+
+    repositories {
+		jcenter()
+		mavenCentral()
+	}
+
+	task buildZip(type: Zip) {
+		archiveName = "${project.name}.zip"
+		from compileJava
+		from processResources
+		into('lib') {
+			from configurations.runtime
+		}
+	}
+	build.dependsOn buildZip
+
+	checkstyle {
+		configFile = checkstyleCfg
+		toolVersion = '6.19'
+		ignoreFailures = false
+		sourceSets = [project.sourceSets.main]
+	}
+	build.dependsOn checkstyleMain
+
+	findbugs {
+		toolVersion = '3.0.1'
+		sourceSets = [project.sourceSets.main]
+		effort = 'max'
+	}
+	tasks.withType(FindBugs) {
+		reports {
+			xml.enabled = false
+			html.enabled = true
+		}
+	}
+
+	pmd {
+		toolVersion = '5.4.2'
+		sourceSets = [project.sourceSets.main]
+	}
+}
 
 dependencies {
 	compile project(':aws:gateway:aws-gateway-showcase')
 	compile project(':aws:gateway:aws-gateway-spring')
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.0'
 }
