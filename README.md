@@ -6,16 +6,20 @@
 
 This repository contains examples for [JRestlesss](https://github.com/bbilger/jrestless).
 
-JRestless does not depend on the [serverless framework](https://github.com/serverless/serverless) but it simplifies the necessary AWS configuration tremendously. So all examples contain a `serverless` configuration and the descriptions assume you have `serverless` installed and configured.
+## Preliminary Note
+
+JRestless does not depend on the [serverless framework](https://github.com/serverless/serverless) but it simplifies the necessary AWS configuration tremendously. So all examples contain a `serverless` configuration and the installation descriptions assume you have `serverless` installed and configured.
 
 You can install `serverless` as described in the docs https://serverless.com/framework/docs/guide/installing-serverless/
 
 To run the AWS examples setup your AWS account as described in the docs https://serverless.com/framework/docs/providers/aws/setup/
 
+## Examples
+
 * [AWS](aws)
   * [API Gateway](aws/gateway)
     * [aws-gateway-showcase](aws/gateway/aws-gateway-showcase)
-      * Example showing JRestless' features
+      * Example showing JRestless' features.
     * [aws-gateway-spring](aws/gateway/aws-gateway-spring)
       * Example showing how to use Spring in JRestless.
     * [aws-gateway-usage-example](aws/gateway/aws-gateway-usage-example)
