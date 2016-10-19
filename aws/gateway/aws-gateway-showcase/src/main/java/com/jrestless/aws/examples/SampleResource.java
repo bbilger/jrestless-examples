@@ -67,15 +67,15 @@ public class SampleResource {
 	}
 
 	@GET
-	@Path("/gateway-request-context")
-	public Response reflectGatewayRequestContext(@Context GatewayRequestContext gatewayRequestContext) {
-		return Response.ok(gatewayRequestContext).build();
-	}
-
-	@GET
 	@Path("/gateway-request")
 	public Response reflectGatewayRequest(@Context GatewayRequest gatewayRequest) {
 		return Response.ok(gatewayRequest).build();
+	}
+
+	@GET
+	@Path("/gateway-request-context")
+	public Response reflectGatewayRequestContext(@Context GatewayRequestContext gatewayRequestContext) {
+		return Response.ok(gatewayRequestContext).build();
 	}
 
 	@GET

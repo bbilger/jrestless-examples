@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: java8
   stage: dev
-  region: us-west-2
+  region: eu-central-1
 
 package:
   artifact: build/distributions/aws-gateway-spring.zip
