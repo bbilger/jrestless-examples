@@ -1,0 +1,24 @@
+service: aws-service-usage-example-client
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: eu-central-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: "*"
+          
+
+package:
+  artifact: build/distributions/aws-service-usage-example-client.zip
+
+functions:
+  api:
+    handler: com.jrestless.aws.examples.RequestHandler
+    events:
+      - http:
+          path: api/{proxy+}
+          method: any

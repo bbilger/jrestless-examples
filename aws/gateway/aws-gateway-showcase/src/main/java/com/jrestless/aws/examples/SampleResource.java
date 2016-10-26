@@ -36,7 +36,7 @@ public class SampleResource {
 	@GET
 	@Path("/info")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response getInfoAsJson() {
+	public Response getInfo() {
 		return Response.ok(new JaxbDto("up\nand\nrunning")).build();
 	}
 

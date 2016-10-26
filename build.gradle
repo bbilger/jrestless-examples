@@ -61,6 +61,8 @@ dependencies {
 	compile project(':aws:gateway:aws-gateway-showcase')
 	compile project(':aws:gateway:aws-gateway-spring')
 	compile project(':aws:gateway:aws-gateway-usage-example')
+	compile project(':aws:service:aws-service-usage-example')
+	compile project(':aws:service:aws-service-usage-example-client')
 }
 
 task wrapper(type: Wrapper) {

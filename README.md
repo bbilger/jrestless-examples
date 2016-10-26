@@ -24,3 +24,6 @@ To run the AWS examples setup your AWS account as described in the docs https://
       * Example showing how to use Spring in JRestless.
     * [aws-gateway-usage-example](aws/gateway/aws-gateway-usage-example)
       * Simple JRestless usage example.
+  * [Lambda Service Function](aws/service)
+    * [aws-service-usage-example](aws/service/aws-service-usage-example)
+      * Example showing how to invoke one Lambda (service) function from another (API Gateway).

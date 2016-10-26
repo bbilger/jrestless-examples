@@ -1,0 +1,14 @@
+service: aws-service-usage-example
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: eu-central-1
+
+package:
+  artifact: build/distributions/aws-service-usage-example.zip
+
+functions:
+  api:
+    handler: com.jrestless.aws.examples.RequestHandler
