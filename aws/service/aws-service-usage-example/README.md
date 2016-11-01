@@ -14,6 +14,7 @@ cd aws/service/aws-service-usage-example
 serverless deploy
 cd ../aws-service-usage-example-client
 serverless deploy
+serverless logs -f "api" -t # if you want to tail the logs
 ```
 
 ## Endpoints

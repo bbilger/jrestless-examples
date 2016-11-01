@@ -10,6 +10,7 @@ cd jrestless-examples
 ./gradlew build
 cd aws/gateway/aws-gateway-usage-example
 serverless deploy
+serverless logs -f "sample" -t # if you want to tail the logs
 ```
 
 ## Endpoints
