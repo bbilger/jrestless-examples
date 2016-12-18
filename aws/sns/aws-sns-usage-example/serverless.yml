@@ -1,0 +1,17 @@
+service: aws-sns-usage-example-service
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: eu-central-1
+
+package:
+  artifact: build/distributions/aws-sns-usage-example.zip
+
+functions:
+  entityEvents:
+    handler: com.jrestless.aws.examples.RequestHandler
+    events:
+      - sns: entity-created
+      - sns: entity-deleted

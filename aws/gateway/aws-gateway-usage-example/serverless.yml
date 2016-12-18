@@ -13,6 +13,4 @@ functions:
   sample:
     handler: com.jrestless.aws.examples.RequestHandler
     events:
-      - http:
-          path: sample/{proxy+}
-          method: any
+      - http: ANY /

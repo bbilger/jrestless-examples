@@ -1,0 +1,24 @@
+service: aws-gateway-security-custom-authorizer-service
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: eu-central-1
+
+package:
+  artifact: build/distributions/aws-gateway-security-custom-authorizer.zip
+
+functions:
+  api:
+    handler: com.jrestless.aws.examples.RequestHandler
+    events:
+      - http:
+          path: api/public
+          method: get
+      - http:
+          path: api/private
+          method: get
+          authorizer: authFn
+  authFn:
+    handler: com.jrestless.aws.examples.CustomAuthorizerHandler

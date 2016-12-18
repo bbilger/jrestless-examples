@@ -2,11 +2,12 @@ package com.jrestless.aws.examples;
 
 import javax.annotation.Nullable;
 
+import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
-import com.jrestless.aws.gateway.GatewayResourceConfig;
+import com.jrestless.aws.gateway.GatewayFeature;
 import com.jrestless.aws.gateway.handler.GatewayRequestAndLambdaContext;
 import com.jrestless.aws.gateway.handler.GatewayRequestObjectHandler;
 import com.jrestless.aws.gateway.io.GatewayResponse;
@@ -27,19 +28,19 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 		SLF4JBridgeHandler.removeHandlersForRootLogger();
 		SLF4JBridgeHandler.install();
 		// configure the application with the resource + bind the backendService
-		init(new GatewayResourceConfig().register(BackendServiceFactory.createBinder())
+		init(new ResourceConfig().register(GatewayFeature.class).register(BackendServiceFactory.createBinder())
 				.packages("com.jrestless.aws.examples"));
 		start();
 	}
 
 	@Override
-	public void beforeHandleRequest(GatewayRequestAndLambdaContext request,
+	protected void beforeHandleRequest(GatewayRequestAndLambdaContext request,
 			JRestlessContainerRequest containerRequest) {
 		LOG.info("start to handle request: " + request.getGatewayRequest());
 	}
 
 	@Override
-	public GatewayResponse onRequestSuccess(GatewayResponse response, GatewayRequestAndLambdaContext request,
+	protected GatewayResponse onRequestSuccess(GatewayResponse response, GatewayRequestAndLambdaContext request,
 			JRestlessContainerRequest containerRequest) {
 		LOG.info("request handled successfully: " + response);
 		return response;
@@ -49,6 +50,6 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 	public GatewayResponse onRequestFailure(Exception e, GatewayRequestAndLambdaContext request,
 			@Nullable JRestlessContainerRequest containerRequest) {
 		LOG.error("request handling failed: " + request.getGatewayRequest(), e);
-		return createInternalServerErrorResponse();
+		return super.onRequestFailure(e, request, containerRequest);
 	}
 }

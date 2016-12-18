@@ -1,0 +1,30 @@
+service: aws-gateway-security-cognito-authorizer-service
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: eu-central-1
+  environment:
+    USER_POOL_ID: ${file(./cognitoUserPoolSettings.yml):userPoolId}
+    CLIENT_ID: ${file(./cognitoUserPoolSettings.yml):clientId}
+
+package:
+  artifact: build/distributions/aws-gateway-security-cognito-authorizer.zip
+
+functions:
+  api:
+    handler: com.jrestless.aws.examples.RequestHandler
+    events:
+      - http:
+          path: api/public
+          method: get
+      - http:
+          path: api/private
+          method: get
+      - http:
+          path: ui
+          method: get
+      - http:
+          path: ui/{proxy+}
+          method: get

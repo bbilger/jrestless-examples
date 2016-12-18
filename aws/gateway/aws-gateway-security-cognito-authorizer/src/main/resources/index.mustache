@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="ui/jsbn.js"></script>
+<script type="text/javascript" src="ui/jsbn2.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.6/sjcl.js"></script>
+<script type="text/javascript" src="ui/aws-cognito-sdk.min.js"></script>
+<script type="text/javascript" src="ui/amazon-cognito-identity.min.js"></script>
+<script type="text/javascript" src="ui/auth.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.7.6/aws-sdk.min.js"></script>
+<script type="text/javascript" type="text/javascript">
+var userPoolId = '{{userPoolId}}';
+var clientId = '{{clientId}}';
+var commonErrorHandler = function(error) {
+	alert(error);
+}
+function handleSignUpSubmit(form) {
+	try {
+		var successHandler = function(cognitoUser) {
+			console.log('signed-up user: ' + cognitoUser);
+			var userName = cognitoUser.getUsername();
+			document.confirmationCodeForm.email.value = userName;
+			document.loginForm.email.value = userName;
+			alert('Signed up successfully. Wait for the email and enter the confirmation code into the next form');
+		};
+		Auth.signUp(userPoolId, clientId, form.email.value, form.password.value, successHandler, commonErrorHandler);
+	} catch (e) {
+		alert(e);
+	}
+	return false;
+}
+function handleConfirmationCodeSubmit(form) {
+	try {
+		var successHandler = function(result) {
+			console.log('confirmation result:' + result);
+			alert('Account has been confirmed successfully. You can now login.');
+		};
+		Auth.confirm(userPoolId, clientId, form.email.value, form.confirmationCode.value, successHandler, commonErrorHandler);
+	} catch (e) {
+		alert(e);
+	}
+	return false;
+}
+function handleLoginSubmit(form) {
+	try {
+		var successHandler = function(result) {
+			console.log('login result:' + result);
+			document.getElementById('idToken').innerHTML = result.idToken.jwtToken;
+			document.getElementById('accessToken').innerHTML = result.getAccessToken().getJwtToken();
+			alert('Login successful. Use the ID token to make authenticated request to the (private) API.');
+		};
+		Auth.login(userPoolId, clientId, form.email.value, form.password.value, successHandler, commonErrorHandler);
+	} catch (e) {
+		alert(e);
+	}
+	return false;
+}
+</script>
+</head>
+
+<body>
+<form name="signupForm" class="aligned-form" onsubmit="return handleSignUpSubmit(this)">
+	<fieldset>
+		<legend>Sign Up</legend>
+		<p class="aligned-form-row">
+			<label for="email">Email:</label>
+			<input name="email" type="text" required="required"/>
+		</p>
+		<p class="aligned-form-row">
+			<label for="password">Password:</label>
+			<input name="password" type="password" required="required"/>
+		</p>
+		<p class="aligned-form-row">
+			<input name="submit" type="submit" value="Sign Up"/>
+		</p>
+	</fieldset>
+</form>
+
+<form name="confirmationCodeForm" class="aligned-form" onsubmit="return handleConfirmationCodeSubmit(this)">
+	<fieldset>
+		<legend>Confirm</legend>
+		<p class="aligned-form-row">
+			<label for="email">Email:</label>
+			<input name="email" type="text" required="required"/>
+		</p>
+		<p class="aligned-form-row">
+			<label for="confirmationCode">Confirmation Code:</label>
+			<input name="confirmationCode" type="text" required="required"/>
+		</p>
+		<p class="aligned-form-row">
+			<input name="submit" type="submit" value="Confirm"/>
+		</p>
+	</fieldset>
+</form>
+
+<form name="loginForm" class="aligned-form" onsubmit="return handleLoginSubmit(this)">
+	<fieldset>
+		<legend>Login</legend>
+		<p class="aligned-form-row">
+			<label for="email">Email:</label>
+			<input name="email" type="text" required="required"/>
+		</p>
+		<p class="aligned-form-row">
+			<label for="password">Password:</label>
+			<input name="password" type="password" required="required"/>
+		</p>
+		<p class="aligned-form-row">
+			<input name="submit" type="submit" value="Sign Up"/>
+		</p>
+	</fieldset>
+</form>
+
+<div>
+	<p>
+		ID Token:<br/>
+		<span id="idToken"></span>
+	</p>
+	<p>
+		Access Token:<br/>
+		<span id="accessToken"></span>
+	</p>
+</div>
+
+</body>
+
+</html>

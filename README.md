@@ -12,7 +12,7 @@ JRestless does not depend on the [serverless framework](https://github.com/serve
 
 You can install `serverless` as described in the docs https://serverless.com/framework/docs/guide/installing-serverless/
 
-To run the AWS examples setup your AWS account as described in the docs https://serverless.com/framework/docs/providers/aws/setup/
+To run the AWS examples setup your AWS account as described in the docs https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
 ## Examples
 
@@ -24,6 +24,15 @@ To run the AWS examples setup your AWS account as described in the docs https://
       * Example showing how to use Spring in JRestless.
     * [aws-gateway-usage-example](aws/gateway/aws-gateway-usage-example)
       * Simple JRestless usage example.
+    * [aws-gateway-binary](aws/gateway/aws-gateway-binary)
+      * Example how to return and receive binary data.
+    * [aws-gateway-security-cognito-authorizer](aws/gateway/aws-gateway-security-cognito-authorizer)
+      * Example how to use a cognito user pool authorizer.
+    * [aws-gateway-security-custom-authorizer](aws/gateway/aws-gateway-security-custom-authorizer)
+      * Example showing how to use a custom authorizer.
   * [Lambda Service Function](aws/service)
     * [aws-service-usage-example](aws/service/aws-service-usage-example)
       * Example showing how to invoke one Lambda (service) function from another (API Gateway).
+  * [SNS Function](aws/sns)
+    * [aws-sns-usage-example](aws/sns/aws-sns-usage-example)
+      * Example showing how to use JRestless to handle SNS notifications.

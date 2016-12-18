@@ -1,6 +1,8 @@
-# AWS Gateway Spring Example
+# AWS API Gateway Spring Example
 
 Example showing how to use Spring in JRestless.
+
+Note: Spring can be used in every handler type (service, sns, apigw)!
 
 ## Installation & Deployment
 

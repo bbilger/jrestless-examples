@@ -1,6 +1,8 @@
 package com.jrestless.aws.examples;
 
-import com.jrestless.aws.gateway.GatewayResourceConfig;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import com.jrestless.aws.gateway.GatewayFeature;
 import com.jrestless.aws.gateway.handler.GatewayRequestObjectHandler;
 
 /**
@@ -11,7 +13,10 @@ import com.jrestless.aws.gateway.handler.GatewayRequestObjectHandler;
  */
 public class RequestHandler extends GatewayRequestObjectHandler {
 	public RequestHandler() {
-		init(new GatewayResourceConfig().packages("com.jrestless.aws.examples"));
+		ResourceConfig config = new ResourceConfig()
+				.register(GatewayFeature.class)
+				.packages("com.jrestless.aws.examples");
+		init(config);
 		start();
 	}
 }

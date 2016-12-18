@@ -3,7 +3,7 @@ dependencies {
 	 * Since we target Java 1.8, we cannot use Spring 3 but have to use Spring 4. Else we would see:  
 	 * "ASM ClassReader failed to parse class file - probably due to a new Java class file version that isn't supported yet"
 	 */ 
-	compile('org.glassfish.jersey.ext:jersey-spring3:2.23') {
+	compile("org.glassfish.jersey.ext:jersey-spring3:${jerseyVersion}") {
 		exclude module: 'org.springframework'
 	}
 	compile (
@@ -23,9 +23,9 @@ dependencies {
 	)
 	
 	compile(
-		'com.jrestless.aws:jrestless-aws-gateway-handler:0.3.0',
+		"com.jrestless.aws:jrestless-aws-gateway-handler:${jrestlessVersion}",
 		'com.amazonaws:aws-lambda-java-log4j:1.0.0',
-		'org.glassfish.jersey.media:jersey-media-json-jackson:2.23',
+		"org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}",
 		'org.slf4j:slf4j-log4j12:1.7.21',
 		'org.slf4j:jul-to-slf4j:1.7.21'
 	)

@@ -1,4 +1,4 @@
-# AWS Gateway Usage Example
+# AWS API Gateway Usage Example
 
 Simple JRestless usage example.
 

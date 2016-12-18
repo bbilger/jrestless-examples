@@ -61,8 +61,12 @@ dependencies {
 	compile project(':aws:gateway:aws-gateway-showcase')
 	compile project(':aws:gateway:aws-gateway-spring')
 	compile project(':aws:gateway:aws-gateway-usage-example')
+	compile project(':aws:gateway:aws-gateway-security-custom-authorizer')
+	compile project(':aws:gateway:aws-gateway-security-cognito-authorizer')
+	compile project(':aws:gateway:aws-gateway-binary')
 	compile project(':aws:service:aws-service-usage-example')
 	compile project(':aws:service:aws-service-usage-example-client')
+	compile project(':aws:sns:aws-sns-usage-example')
 }
 
 task wrapper(type: Wrapper) {

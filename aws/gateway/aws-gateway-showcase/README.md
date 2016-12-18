@@ -1,4 +1,4 @@
-# AWS Gateway Showcase
+# AWS API Gateway Showcase
 
 Example showing JRestless' features.
 
