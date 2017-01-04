@@ -60,6 +60,7 @@ subprojects {
 dependencies {
 	compile project(':aws:gateway:aws-gateway-showcase')
 	compile project(':aws:gateway:aws-gateway-spring')
+	compile project(':aws:gateway:aws-gateway-guice')
 	compile project(':aws:gateway:aws-gateway-usage-example')
 	compile project(':aws:gateway:aws-gateway-security-custom-authorizer')
 	compile project(':aws:gateway:aws-gateway-security-cognito-authorizer')
