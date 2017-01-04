@@ -1,8 +1,8 @@
-# AWS API Gateway Spring Example
+# AWS API Gateway Guice Example
 
-Example showing how to use Spring in JRestless.
+Example showing how to use Guice in JRestless.
 
-Note: Spring can be used in every handler type (service, sns, apigw)!
+Note: Guice can be used in every handler type (service, sns, apigw)!
 
 ## Installation & Deployment
 
