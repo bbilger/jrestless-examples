@@ -36,6 +36,8 @@ The descriptions of the examples are also valid for Gradle, only. If you use Mav
       * Example showing JRestless' features.
     * [aws-gateway-spring](aws/gateway/aws-gateway-spring)
       * Example showing how to use Spring in JRestless.
+    * [aws-gateway-guice](aws/gateway/aws-gateway-guice)
+      * Example showing how to use Guice in JRestless.
     * [aws-gateway-usage-example](aws/gateway/aws-gateway-usage-example)
       * Simple JRestless usage example.
     * [aws-gateway-binary](aws/gateway/aws-gateway-binary)

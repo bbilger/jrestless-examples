@@ -26,6 +26,7 @@
     <module>aws/gateway/aws-gateway-security-custom-authorizer</module>
     <module>aws/gateway/aws-gateway-showcase</module>
     <module>aws/gateway/aws-gateway-spring</module>
+    <module>aws/gateway/aws-gateway-guice</module>
     <module>aws/gateway/aws-gateway-usage-example</module>
     <module>aws/service/aws-service-usage-example</module>
     <module>aws/service/aws-service-usage-example-client</module>
