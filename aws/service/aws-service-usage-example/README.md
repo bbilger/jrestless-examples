@@ -4,6 +4,8 @@ Example showing JRestless' _Lambda service function_ features.
 
 All requests made through API Gateway or rather `aws-service-usage-example-client` are delegated to the _Lambda service function_ `aws-service-usage-example`.
 
+**Attention**: If you deploy `aws/service/aws-service-usage-example` to a region different than `eu-central-1`, then please make sure to adjust the region in the client, as well: https://github.com/bbilger/jrestless-examples/blob/master/aws/service/aws-service-usage-example-client/src/main/java/com/jrestless/aws/examples/BackendServiceFactory.java#L27 (don't forget to re-built and re-deploy the client function, afterwards)
+
 ## Installation & Deployment
 
 ```bash
