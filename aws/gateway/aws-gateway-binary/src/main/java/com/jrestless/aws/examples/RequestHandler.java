@@ -1,5 +1,6 @@
 package com.jrestless.aws.examples;
 
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,10 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 		SLF4JBridgeHandler.removeHandlersForRootLogger();
 		SLF4JBridgeHandler.install();
 		// configure the application with the resource
-		init(new ResourceConfig().register(GatewayFeature.class).packages("com.jrestless.aws.examples"));
+		init(new ResourceConfig()
+				.register(GatewayFeature.class)
+				.register(MultiPartFeature.class)
+				.packages("com.jrestless.aws.examples"));
 		start();
 	}
 

@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -21,6 +22,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
 
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,9 +35,9 @@ import org.slf4j.LoggerFactory;
  *
  */
 @Path("/api")
-public class SampleResource {
+public class ApiResource {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SampleResource.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ApiResource.class);
 	private static final int BUFFER_LENGTH = 1024;
 	private static final int NR_RETRIES  = 3;
 
@@ -117,6 +120,17 @@ public class SampleResource {
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public byte[] postAndGetBinary(byte[] data) {
 		return data;
+	}
+
+	@POST
+	@Path("/upload")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void uploadFile(
+			@FormDataParam("file") InputStream uploadedInputStream,
+			@FormDataParam("file") FormDataBodyPart body) {
+		LOG.info("file name: {}", body.getContentDisposition().getFileName());
+		LOG.info("file type: {}", body.getMediaType());
+		LOG.info("file contents: {}", new String(toByteArray(uploadedInputStream), StandardCharsets.UTF_8));
 	}
 
 	public static byte[] toByteArray(InputStream is) {

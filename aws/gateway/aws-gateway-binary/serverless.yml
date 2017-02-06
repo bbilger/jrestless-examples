@@ -16,3 +16,6 @@ functions:
       - http:
           path: api/{proxy+}
           method: any
+      - http:
+          path: ui/{proxy+}
+          method: any
