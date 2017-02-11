@@ -1,5 +1,10 @@
 package com.jrestless.aws.examples;
 
+import java.io.IOException;
+
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
+
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +33,14 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 		// configure the application with the resource
 		ResourceConfig config = new ResourceConfig()
 				.register(GatewayFeature.class)
-				.packages("com.jrestless.aws.examples");
+				.packages("com.jrestless.aws.examples")
+				.register(new ContainerRequestFilter() {
+					@Override
+					public void filter(ContainerRequestContext request) throws IOException {
+						LOG.info("baseUri: " + request.getUriInfo().getBaseUri());
+						LOG.info("requestUri: " + request.getUriInfo().getRequestUri());
+					}
+				});
 		init(config);
 		start();
 	}

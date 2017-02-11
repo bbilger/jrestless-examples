@@ -1,5 +1,7 @@
 package com.jrestless.aws.examples;
 
+import java.net.URI;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -13,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,6 +35,12 @@ import com.jrestless.aws.gateway.io.GatewayRequestContext;
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON })
 public class SampleResource {
+
+	@GET
+	@Path("/uris")
+	public Response getUris(@Context UriInfo uriInfo) {
+		return Response.ok(new BaseAndRequestUri(uriInfo)).build();
+	}
 
 	@GET
 	@Path("/info")
@@ -112,6 +121,28 @@ public class SampleResource {
 		}
 		public String getValue() {
 			return value;
+		}
+	}
+
+	public static class BaseAndRequestUri {
+
+		private final String baseUri;
+		private final String requestUri;
+		BaseAndRequestUri(String baseUri, String requestUri) {
+			this.baseUri = baseUri;
+			this.requestUri = requestUri;
+		}
+		BaseAndRequestUri(URI baseUri, URI requestUri) {
+			this(baseUri.toString(), requestUri.toString());
+		}
+		BaseAndRequestUri(UriInfo uriInfo) {
+			this(uriInfo.getBaseUri(), uriInfo.getRequestUri());
+		}
+		public String getBaseUri() {
+			return baseUri;
+		}
+		public String getRequestUri() {
+			return requestUri;
 		}
 	}
 

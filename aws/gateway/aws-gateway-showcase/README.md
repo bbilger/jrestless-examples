@@ -17,6 +17,7 @@ serverless logs -f "api" -t # if you want to tail the logs
 
 |Endpoints                   |Method|Consumes |Produces  | Status Code | Comment
 |----------------------------|------|---------|----------|-------------|---
+|api/uris                    |GET   |-        |JSON      |200          | returns the base and request URI for this request
 |api/info                    |GET   |-        |XML, JSON |200          | responds with a static body
 |api/cookie?bad=[true/false] |GET   |-        |JSON      |200, 400     | responds either with 200 or a 400 depending on the query parameter `bad`, sets a cookie header and includes a body
 |api/moved                   |GET   |-        |-         |301          | responds with a 301 and a `Location` header
