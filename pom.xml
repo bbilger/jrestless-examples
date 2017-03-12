@@ -12,7 +12,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.7.21</slf4j.version>
-    <jrestless.version>0.4.0</jrestless.version>
+    <jrestless.version>0.5.0</jrestless.version>
     <jersey.version>2.25</jersey.version>
     <lambdaLog4j.version>1.0.0</lambdaLog4j.version>
     <maven.compiler.source>1.8</maven.compiler.source>
