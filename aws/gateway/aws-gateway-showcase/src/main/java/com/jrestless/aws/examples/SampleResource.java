@@ -21,9 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jrestless.aws.gateway.io.GatewayIdentity;
 import com.jrestless.aws.gateway.io.GatewayRequest;
-import com.jrestless.aws.gateway.io.GatewayRequestContext;
 
 /**
  * A sample resource.
@@ -79,18 +77,6 @@ public class SampleResource {
 	@Path("/gateway-request")
 	public Response reflectGatewayRequest(@Context GatewayRequest gatewayRequest) {
 		return Response.ok(gatewayRequest).build();
-	}
-
-	@GET
-	@Path("/gateway-request-context")
-	public Response reflectGatewayRequestContext(@Context GatewayRequestContext gatewayRequestContext) {
-		return Response.ok(gatewayRequestContext).build();
-	}
-
-	@GET
-	@Path("/gateway-identity")
-	public Response reflectGatewayIdentity(@Context GatewayIdentity gatewayIdentity) {
-		return Response.ok(gatewayIdentity).build();
 	}
 
 	@GET
