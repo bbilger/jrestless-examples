@@ -1,0 +1,1 @@
+see see [aws-gateway-cors-frontend](../aws-gateway-cors-frontend)

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" type="text/javascript">
+function executeRequest(form) {
+	var url = form.url.value;
+	var type = form.method.value;
+	var data = form.data.value;
+	console.log('>>>>>>>>>>>>>>>>>>');
+	console.log('starting Ajax request using http method "' + type + '"');
+	$.ajax({
+		url: url,
+		type: type,
+		contentType: 'text/plain',
+		data: data,
+		success: function (data, status) {
+			console.log('response body: ' + data);
+			console.log('response status: ' + status);
+			console.log('<<<<<<<<<<<<<<<<<<');
+			alert('success');
+		},
+		error: function (xhr, desc, err) {
+			console.log(xhr);
+			console.log('Description: ' + desc);
+			console.log('Error: ' + err);
+			console.log('<<<<<<<<<<<<<<<<<<');
+			alert('failure');
+		}
+	});
+	return false;
+}
+</script>
+</head>
+
+<body>
+<form name="cors" onsubmit="return executeRequest(this)">
+	<fieldset>
+		<label for="url">URL:</label>
+		<br/>
+		<input name="url" type="text" required="required" size="100"/>
+		<br/>
+		<label for="method">Method:</label>
+		<br/>
+		<select name="method" size="1" required="required">
+			<option value="get">get</option>
+			<option value="post">post</option>
+			<option value="put">put</option>
+			<option value="delete">delete</option>
+			<option value="options">options</option>
+			<option value="patch">patch</option>
+		</select>
+		<br/>
+		<label for="data">Data:</label>
+		<br/>
+		<input name="data" type="text" size="100"/>
+		<br/>
+		<input name="submit" type="submit" value="Execute Request"/>
+	</fieldset>
+</form>
+
+</body>
+
+</html>

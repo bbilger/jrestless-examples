@@ -1,0 +1,18 @@
+service: aws-gateway-cors-frontend-service
+
+provider:
+  name: aws
+  runtime: java8
+  stage: dev
+  region: eu-central-1
+
+package:
+  artifact: build/distributions/aws-gateway-cors-frontend.zip
+
+functions:
+  ui:
+    handler: com.jrestless.aws.examples.RequestHandler
+    events:
+      - http:
+          path: /
+          method: any

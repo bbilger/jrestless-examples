@@ -30,7 +30,6 @@ public class UiResource {
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public Viewable get() {
-		System.getenv("");
 		return new Viewable("/index.mustache", new IndexModel());
 	}
 
@@ -73,7 +72,7 @@ public class UiResource {
 		return loadExternalResource(JSBN2_URL);
 	}
 
-	private String loadInternalResource(String path) {
+	private static String loadInternalResource(String path) {
 		try (InputStream is = UiResource.class.getResourceAsStream(path)) {
 			return toString(is);
 		} catch (IOException e) {
@@ -81,7 +80,7 @@ public class UiResource {
 		}
 	}
 
-	private String loadExternalResource(String url) {
+	private static String loadExternalResource(String url) {
 		try {
 			URL randomCatUrl = new URL(url);
 			HttpURLConnection httpConnection = (HttpURLConnection) randomCatUrl.openConnection();
@@ -98,7 +97,7 @@ public class UiResource {
 		}
 	}
 
-	private String toString(InputStream is) {
+	private static String toString(InputStream is) {
 		try (BufferedReader br = new BufferedReader(
 				new InputStreamReader(is, StandardCharsets.UTF_8))) {
 			return br.lines().collect(Collectors.joining("\n"));

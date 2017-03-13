@@ -38,6 +38,8 @@ The descriptions of the examples are also valid for Gradle, only. If you use Mav
       * Example showing how to use Spring in JRestless.
     * [aws-gateway-cdi](aws/gateway/aws-gateway-cdi)
       * Example showing how to use CDI/Weld in JRestless.
+    * [aws-gateway-cors](aws/gateway/aws-gateway-cors-frontend)
+      * Example showing how to use CORS in JRestless.
     * [aws-gateway-guice](aws/gateway/aws-gateway-guice)
       * Example showing how to use Guice in JRestless.
     * [aws-gateway-usage-example](aws/gateway/aws-gateway-usage-example)

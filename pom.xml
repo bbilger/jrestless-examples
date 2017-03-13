@@ -28,6 +28,8 @@
     <module>aws/gateway/aws-gateway-spring</module>
     <module>aws/gateway/aws-gateway-guice</module>
     <module>aws/gateway/aws-gateway-cdi</module>
+    <module>aws/gateway/aws-gateway-cors-backend</module>
+    <module>aws/gateway/aws-gateway-cors-frontend</module>
     <module>aws/gateway/aws-gateway-usage-example</module>
     <module>aws/service/aws-service-usage-example</module>
     <module>aws/service/aws-service-usage-example-client</module>
