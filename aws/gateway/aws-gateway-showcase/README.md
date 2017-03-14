@@ -27,3 +27,5 @@ serverless logs -f "api" -t # if you want to tail the logs
 |api/lambda-context          |GET   |-        |JSON      |200          | responds with the request's lambda context - showing how to inject it a JAX-RS endpoint
 |api/post1                   |GET   |JSON     |JSON      |200          | responds with the request body (`{"value": "..."}`)
 |api/post2                   |GET   |JSON, XML|JSON,XML  |200          | responds with the request body (`{"value": "..."}`, `<jaxbDto><value>...</value></jaxbDto>`)
+|api/application-exception   |GET   |-        |JSON      |500          | showcase a specific exception mapper
+|api/global-exception        |GET   |-        |JSON      |500          | showcase a non-specific auto-discovered exception mapper

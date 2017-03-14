@@ -34,6 +34,9 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 		ResourceConfig config = new ResourceConfig()
 				.register(GatewayFeature.class)
 				.packages("com.jrestless.aws.examples")
+				.register(ApplicationExceptionMapper.class)
+				// auto-discovery works, too
+				// .register(GlobalExceptionMapper.class)
 				.register(new ContainerRequestFilter() {
 					@Override
 					public void filter(ContainerRequestContext request) throws IOException {

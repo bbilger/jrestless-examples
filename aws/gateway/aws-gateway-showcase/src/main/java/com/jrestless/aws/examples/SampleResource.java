@@ -99,6 +99,18 @@ public class SampleResource {
 		return Response.ok(dto).build();
 	}
 
+	@GET
+	@Path("/application-exception")
+	public Response throwApplicationException() throws ApplicationException {
+		throw new ApplicationException();
+	}
+
+	@GET
+	@Path("/global-exception")
+	public Response throwGlobalException() {
+		throw new RuntimeException();
+	}
+
 	public static class PojoDto {
 		private final String value;
 		@JsonCreator
