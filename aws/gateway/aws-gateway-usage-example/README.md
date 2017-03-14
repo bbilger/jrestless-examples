@@ -17,4 +17,4 @@ serverless logs -f "sample" -t # if you want to tail the logs
 
 |Endpoints                   |Method|Consumes|Produces  | Comment
 |----------------------------|------|--------|----------|---
-|sample/health               |GET   |-       |XML, JSON |
+|sample/health               |GET   |-       |JSON      |
