@@ -35,6 +35,17 @@ curl -v --header "Accept: image/gif" .../dev/api/cat-file > cat.gif
 curl -v --header "Accept: application/octet-stream" --header "Content-Type: application/octet-stream" --request POST --data-binary "@cat.gif" .../dev/api/binary > cat_from_server.gif
 ```
 
+Since we also register Jersey's `EncodingFilter` and `GzipEncoder`, JRestless supports gzip encoding (for binary requests and responses) here, as well:
+
+```bash
+curl -v --compressed --header "Accept: image/gif" --header "Accept-Encoding: gzip" .../dev/api/cat-input-stream > cat.gif
+curl -v --compressed --header "Accept: image/gif" --header "Accept-Encoding: gzip" .../dev/api/cat-byte-array > cat.gif
+curl -v --compressed --header "Accept: image/gif" --header "Accept-Encoding: gzip" .../dev/api/cat-streaming-output > cat.gif
+curl -v --compressed --header "Accept: image/gif" --header "Accept-Encoding: gzip" .../dev/api/cat-data-source > cat.gif
+curl -v --compressed --header "Accept: image/gif" --header "Accept-Encoding: gzip" .../dev/api/cat-file > cat.gif
+```
+Note: `--compressed` tells `curl` to decompress the response.
+
 `.../ui/upload` can be opened in a browser to upload a file via a form to `.../api/upload`.
 
 ![](upload_form.png)

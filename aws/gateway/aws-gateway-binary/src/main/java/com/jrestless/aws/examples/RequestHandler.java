@@ -1,7 +1,9 @@
 package com.jrestless.aws.examples;
 
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
@@ -30,6 +32,8 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 		init(new ResourceConfig()
 				.register(GatewayFeature.class)
 				.register(MultiPartFeature.class)
+				.register(EncodingFilter.class)
+				.register(GZipEncoder.class)
 				.packages("com.jrestless.aws.examples"));
 		start();
 	}
