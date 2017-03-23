@@ -1,4 +1,4 @@
-service: aws-gateway-security-cognito-authorizer-service
+service: apigw-cognito-authorizer-service
 
 provider:
   name: aws
