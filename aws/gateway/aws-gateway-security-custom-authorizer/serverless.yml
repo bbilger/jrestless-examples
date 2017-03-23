@@ -1,4 +1,4 @@
-service: aws-gateway-security-custom-authorizer-service
+service: apigw-custom-authorizer-service
 
 provider:
   name: aws

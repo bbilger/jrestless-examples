@@ -3,6 +3,9 @@ package com.jrestless.aws.examples;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
@@ -14,8 +17,11 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
  */
 public class CustomAuthorizerHandler implements RequestHandler<Map<String, Object>, Map<String, Object>> {
 
+	private static final Logger LOG = LoggerFactory.getLogger(CustomAuthorizerHandler.class);
+
 	@Override
 	public Map<String, Object> handleRequest(Map<String, Object> event, Context context) {
+		LOG.info(CustomAuthorizerHandler.class.getSimpleName() + " invoked");
 		String token = (String) event.get("authorizationToken");
 		String resource = (String) event.get("methodArn");
 		String principalId = "123";
