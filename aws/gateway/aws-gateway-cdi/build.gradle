@@ -13,10 +13,18 @@ dependencies {
 	)
 }
 
-// fix Weld/Gradle bug not picking up "beans.xml" on test
-task copyResources(type: Copy) {
+/*
+ * fix Weld/Gradle bug not picking up "beans.xml" on tests
+ * https://stackoverflow.com/questions/30255760/bean-discovery-problems-when-using-weld-se-with-gradle-application-plugin
+ */
+task copyResourcesGradleV3(type: Copy) {
     from "${projectDir}/src/main/resources"
     into "${buildDir}/classes/main"
 }
+task copyResourcesGradleV4(type: Copy) {
+    from "${projectDir}/src/main/resources"
+    into "${buildDir}/classes/java/main"
+}
+task copyResources(dependsOn: ['copyResourcesGradleV4', 'copyResourcesGradleV3'])
 
 processResources.dependsOn copyResources
