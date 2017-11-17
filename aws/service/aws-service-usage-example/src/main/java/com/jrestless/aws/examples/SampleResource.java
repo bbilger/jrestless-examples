@@ -67,7 +67,7 @@ public class SampleResource {
 	}
 
 	@POST
-	@Path("/post1")
+	@Path("/post")
 	public Response postJson(PojoDto dto) {
 		return Response.ok(dto).build();
 	}
