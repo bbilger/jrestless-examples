@@ -10,7 +10,7 @@ Note: Normally you would publish to SNS programmatically but in this example we 
 git clone https://github.com/bbilger/jrestless-examples.git
 cd jrestless-examples
 ./gradlew build
-cd aws/gateway/aws-gateway-security-custom-authorizer
+cd aws/sns/aws-sns-usage-example
 serverless deploy
 serverless logs -f "entityEvents" -t # if you want to tail the logs
 ```
