@@ -3,10 +3,10 @@ package com.jrestless.aws.examples;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import org.glassfish.hk2.api.Factory;
-import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.utilities.Binder;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.internal.inject.AbstractBinder;
+import org.glassfish.jersey.internal.inject.Binder;
+import org.glassfish.jersey.internal.inject.DisposableSupplier;
+import org.glassfish.jersey.internal.inject.InjectionManager;
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.AWSLambdaClient;
@@ -21,7 +21,7 @@ import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
 
-public class BackendServiceFactory implements Factory<BackendService> {
+public class BackendServiceFactory implements DisposableSupplier<BackendService> {
 
 	private static final String BACKEND_SERVICE_FUNCTION_NAME = "aws-service-usage-example-dev-api";
 	private static final Regions BACKEND_SERVICE_REGION = Regions.EU_CENTRAL_1;
@@ -30,7 +30,7 @@ public class BackendServiceFactory implements Factory<BackendService> {
 	private final AWSLambdaClient awsLambdaClient;
 
 	@Inject
-	public BackendServiceFactory(ServiceLocator serviceLocator) {
+	public BackendServiceFactory(InjectionManager serviceLocator) {
 		awsLambdaClient = new AWSLambdaClient();
 		awsLambdaClient.configureRegion(BACKEND_SERVICE_REGION);
 		backendService = Feign.builder()
@@ -45,7 +45,7 @@ public class BackendServiceFactory implements Factory<BackendService> {
 					@Override
 					public Request apply(RequestTemplate input) {
 						// TODO inject the context directly => requires the context to be bound as proxy
-						Context lambdaContext = serviceLocator.getService(Context.class);
+						Context lambdaContext = serviceLocator.getInstance(Context.class);
 						// propagate the AWS request ID => the called service can log the original AWS request ID
 						input.header("X-Base-Aws-Request-Id", lambdaContext.getAwsRequestId());
 						return super.apply(input);
@@ -54,7 +54,7 @@ public class BackendServiceFactory implements Factory<BackendService> {
 	}
 
 	@Override
-	public BackendService provide() {
+	public BackendService get() {
 		return backendService;
 	}
 

@@ -1,18 +1,5 @@
 dependencies {
 	/*
-	 * Since we target Java 1.8, we cannot use Spring 3 but have to use Spring 4. Else we would see:  
-	 * "ASM ClassReader failed to parse class file - probably due to a new Java class file version that isn't supported yet"
-	 */ 
-	compile("org.glassfish.jersey.ext:jersey-spring3:${jerseyVersion}") {
-		exclude module: 'org.springframework'
-	}
-	compile (
-		'org.springframework:spring-core:4.3.2.RELEASE',
-		'org.springframework:spring-beans:4.3.2.RELEASE',
-		'org.springframework:spring-web:4.3.2.RELEASE'	
-	)
-	
-	/*
 	 * Spring requires this and we have it as provided dependency, only.
 	 * So we add it as compile time dependency since we don't have a Servlet container providing this for us.
 	 * This, however, won't turn jrestless in a Servlet container.
@@ -23,9 +10,11 @@ dependencies {
 	)
 	
 	compile(
+		"org.glassfish.jersey.ext:jersey-spring4:${jerseyVersion}",
 		"com.jrestless.aws:jrestless-aws-gateway-handler:${jrestlessVersion}",
 		"com.amazonaws:aws-lambda-java-log4j:${lambdaLog4jVersion}",
 		"org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}",
+		"org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}",
 		"org.slf4j:slf4j-log4j12:${slf4jVersion}",
 		"org.slf4j:jul-to-slf4j:${slf4jVersion}"
 	)
