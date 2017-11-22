@@ -2,11 +2,10 @@ package com.jrestless.aws.examples;
 
 import java.util.List;
 
-import org.apache.log4j.MDC;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.bridge.SLF4JBridgeHandler;
+import org.slf4j.MDC;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.jrestless.aws.service.ServiceFeature;
@@ -27,9 +26,6 @@ public class RequestHandler extends ServiceRequestObjectHandler {
 	private static final Logger LOG = LoggerFactory.getLogger(RequestHandler.class);
 
 	public RequestHandler() {
-		// bridge java.util.logging (used by Jersey) to SLF4J which will use log4j
-		SLF4JBridgeHandler.removeHandlersForRootLogger();
-		SLF4JBridgeHandler.install();
 		// configure the application with the resource
 		ResourceConfig config = new ResourceConfig()
 				.register(ServiceFeature.class)

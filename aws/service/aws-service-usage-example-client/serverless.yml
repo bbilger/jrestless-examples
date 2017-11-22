@@ -10,6 +10,8 @@ provider:
       Action:
         - lambda:InvokeFunction
       Resource: "*"
+  environment: # log jul over log4j2
+    JAVA_TOOL_OPTIONS: -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager
           
 
 package:

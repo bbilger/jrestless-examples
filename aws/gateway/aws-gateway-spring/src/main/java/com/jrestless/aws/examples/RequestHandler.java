@@ -4,7 +4,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.jrestless.aws.gateway.GatewayFeature;
@@ -24,10 +23,6 @@ public class RequestHandler extends GatewayRequestObjectHandler {
 	private static final Logger LOG = LoggerFactory.getLogger(RequestHandler.class);
 
 	public RequestHandler() {
-		// bridge java.util.logging (used by Jersey) to SLF4J which will use log4j
-		SLF4JBridgeHandler.removeHandlersForRootLogger();
-		SLF4JBridgeHandler.install();
-
 		// configure the application with the resource
 		ResourceConfig resourceConfig = new ResourceConfig()
 				.register(GatewayFeature.class)

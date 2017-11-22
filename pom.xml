@@ -11,10 +11,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <slf4j.version>1.7.21</slf4j.version>
     <jrestless.version>0.6.0</jrestless.version>
     <jersey.version>2.26</jersey.version>
-    <lambdaLog4j.version>1.0.0</lambdaLog4j.version>
+    <lambdaLog4j2.version>1.1.0</lambdaLog4j2.version>
+    <log4j2ForLambda.version>2.8.2</log4j2ForLambda.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,7 +43,7 @@
     </repository>
   </repositories>
 
-  <build>
+    <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -51,9 +51,11 @@
         <version>2.4.3</version>
         <configuration>
           <createDependencyReducedPom>false</createDependencyReducedPom>
-          <!-- http://stackoverflow.com/questions/29107376/jersey-problems-with-maven-shade-plugin -->
           <transformers>
+            <!-- http://stackoverflow.com/questions/29107376/jersey-problems-with-maven-shade-plugin -->
             <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+            <!-- http://docs.aws.amazon.com/lambda/latest/dg/java-logging.html -->
+            <transformer implementation="com.github.edwgiz.mavenShadePlugin.log4j2CacheTransformer.PluginsCacheFileTransformer"/>
           </transformers>
         </configuration>
         <executions>
@@ -68,6 +70,13 @@
             </configuration>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.github.edwgiz</groupId>
+            <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
+            <version>2.8.1</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>

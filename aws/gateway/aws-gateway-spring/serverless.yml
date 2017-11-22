@@ -5,6 +5,8 @@ provider:
   runtime: java8
   stage: dev
   region: eu-central-1
+  environment: # log jul over log4j2
+    JAVA_TOOL_OPTIONS: -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager
 
 package:
   artifact: build/distributions/aws-gateway-spring.zip

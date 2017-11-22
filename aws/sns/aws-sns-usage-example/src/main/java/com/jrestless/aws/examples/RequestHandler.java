@@ -3,7 +3,6 @@ package com.jrestless.aws.examples;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,9 +23,6 @@ public class RequestHandler extends SnsRequestObjectHandler {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	public RequestHandler() {
-		// bridge java.util.logging (used by Jersey) to SLF4J which will use log4j
-		SLF4JBridgeHandler.removeHandlersForRootLogger();
-		SLF4JBridgeHandler.install();
 		// configure the application with the resource
 		ResourceConfig config = new ResourceConfig()
 				.register(SnsFeature.class)

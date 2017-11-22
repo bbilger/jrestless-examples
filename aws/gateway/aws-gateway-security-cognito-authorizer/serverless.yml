@@ -8,6 +8,7 @@ provider:
   environment:
     USER_POOL_ID: ${file(./cognitoUserPoolSettings.yml):userPoolId}
     CLIENT_ID: ${file(./cognitoUserPoolSettings.yml):clientId}
+    JAVA_TOOL_OPTIONS: -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager
 
 package:
   artifact: build/distributions/aws-gateway-security-cognito-authorizer.zip

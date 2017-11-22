@@ -2,6 +2,14 @@ dependencies {
 	compile(
 		"com.jrestless.aws:jrestless-aws-gateway-handler:${jrestlessVersion}",
 		"org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}",
-		"org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+		"org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}",
+		// -- logging
+		"com.amazonaws:aws-lambda-java-log4j2:${lambdaLog4j2Version}",
+		"org.apache.logging.log4j:log4j-core:${log4j2ForLambdaVersion}",
+		"org.apache.logging.log4j:log4j-api:${log4j2ForLambdaVersion}",
+		// JRestless uses slf4j internally => log over log4j2
+		"org.apache.logging.log4j:log4j-slf4j-impl:${log4j2ForLambdaVersion}",
+		// Jersey uses jul internally => log over log4j2
+		"org.apache.logging.log4j:log4j-jul:${log4j2ForLambdaVersion}"
 	)
 }
